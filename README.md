@@ -11,6 +11,10 @@ Then update the variable inside the variable called "APIKEY" inside the Python s
 
 You will need to create a directory called "Image" in the same directory as the script.
 
+There will also be a system tray popup that allows you to change the background if you don't like the current one.
+
 Dependencies:
 
 `screeninfo`
+
+`infi.systray`
