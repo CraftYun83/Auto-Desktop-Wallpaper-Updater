@@ -9,7 +9,6 @@ import shutil
 from datetime import datetime
 from screeninfo import get_monitors
 from infi.systray import SysTrayIcon
-import webbrowser
 
 if not os.path.exists(os.getcwd()+"\Image"):
     os.mkdir("Image")
