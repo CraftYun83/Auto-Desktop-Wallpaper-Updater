@@ -8,10 +8,14 @@ import time as t
 import shutil
 from datetime import datetime
 from screeninfo import get_monitors
+from infi.systray import SysTrayIcon
+import webbrowser
 
 if not os.path.exists(os.getcwd()+"\Image"):
     os.mkdir("Image")
+
 mratio = get_monitors()[0].width/get_monitors()[0].height
+APIKEY = ""
 
 def download(src):
     mypath = os.getcwd()+r"\Image\image"
@@ -25,9 +29,9 @@ def download(src):
             return mypath+ext
 
 def choose_wallpaper(query, apikey):
+    global mratio
     while True:
         try:
-            global mratio
             srces = []
             URL = "https://api.pexels.com/v1/search?query="+query
 
@@ -67,11 +71,21 @@ def dt_time(current_time):
 
     return time
 
-APIKEY = ""
+def rcWallpaper(systray):
+    global APIKEY
+    no = datetime.now()
+    cu = int(no.strftime("%H"))
+    ti = dt_time(cu)
+    choose_wallpaper(ti, APIKEY)
+
 now = datetime.now()
 current_time = int(now.strftime("%H"))
 time = dt_time(current_time)
 choose_wallpaper(time, APIKEY)
+
+menu_options = (("Change Wallpaper", None, rcWallpaper),)
+systray = SysTrayIcon("icon.ico", "Auto Wallpaper Updater", menu_options) # I realize there is no icon there, you can add one in the same directory if you would like.
+systray.start()
 
 while True:
     n = datetime.now()
